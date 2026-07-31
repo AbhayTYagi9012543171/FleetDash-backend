@@ -14,7 +14,8 @@ import { initSocket } from "./socket/socket";
 // ======================================
 
 const PORT = Number(process.env.PORT) || 5000;
-const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5173";
+const CLIENT_URL =
+  process.env.FRONTEND_URL ||  "https://fleetdash-frontend.onrender.com";
 const NODE_ENV = process.env.NODE_ENV || "development";
 
 // ======================================
@@ -29,9 +30,21 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: CLIENT_URL,
+    origin: [
+      "https://fleetdash-frontend.onrender.com",
+      "http://localhost:5173",
+    ],
+
     credentials: true,
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+
+    methods: [
+      "GET",
+      "POST",
+      "PUT",
+      "PATCH",
+      "DELETE",
+      "OPTIONS",
+    ],
   },
 });
 
