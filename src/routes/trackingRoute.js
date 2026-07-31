@@ -1,0 +1,26 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const tracking_controller_1 = require("../controllers/tracking.controller");
+const authMiddleware_1 = __importDefault(require("../middleware/authMiddleware"));
+const router = express_1.default.Router();
+// ===============================
+// LIVE TRACKING ROUTES
+// ===============================
+// Get Live Vehicle Tracking
+// GET /api/tracking
+router.get("/", authMiddleware_1.default, tracking_controller_1.getLiveTracking);
+// Update Vehicle Location
+// PUT /api/tracking/:id
+router.put("/:id", authMiddleware_1.default, (req, res) => {
+    res.status(200).json({
+        success: true,
+        message: "Vehicle location update API ready",
+        vehicleId: req.params.id,
+        data: req.body
+    });
+});
+exports.default = router;
