@@ -83,6 +83,8 @@ export interface IVehicle extends Document {
   status: "Active" | "Idle" | "Offline";
   latitude: number;
   longitude: number;
+  gpsDeviceId?: string;
+  lastGpsAt?: Date;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -138,6 +140,19 @@ const vehicleSchema = new Schema<IVehicle>(
       required: true,
       min: -180,
       max: 180,
+    },
+
+    gpsDeviceId: {
+      type: String,
+      trim: true,
+      sparse: true,
+      unique: true,
+    },
+
+    lastGpsAt: {
+      type: Date,
+      default: null,
+      index: true,
     },
   },
   {

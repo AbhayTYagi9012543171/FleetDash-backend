@@ -18,6 +18,7 @@ import analyticsRoutes from "./routes/analyticsRoutes";
 import userRoutes from "./routes/userRoutes";
 import settingsRoutes from "./routes/settingsRoutes";
 import dashboardRoutes from "./routes/dashboardRoutes";
+import gpsRoutes from "./routes/gpsRoutes";
 
 const app = express();
 
@@ -58,7 +59,9 @@ app.use(
     ],
     allowedHeaders: [
       "Content-Type",
-      "Authorization"
+      "Authorization",
+      "x-gps-token",
+      "x-device-id"
     ],
   })
 );
@@ -99,6 +102,7 @@ app.use("/api/drivers", driverRoutes);
 app.use("/api/trips", tripRoutes);
 
 app.use("/api/tracking", trackingRoute);
+app.use("/api/gps", gpsRoutes);
 
 app.use("/api/geofences", geofenceRoutes);
 

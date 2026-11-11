@@ -120,10 +120,7 @@ export const startVehicleSimulator = (
 
 
 
-        io.emit(
-            "vehicleUpdated",
-            vehicles
-        );
+        vehicles.forEach((vehicle) => io.to("fleet").emit("vehicleUpdate", vehicle));
 
 
 
